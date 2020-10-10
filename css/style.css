@@ -1,0 +1,20 @@
+* {box-sizing:border-box}
+
+#slideshow {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
+
+img {
+    width: 50%;
+    height:50%;
+}
+#slideshow {
+    max-width: 1000px;
+    position: absolute;
+    margin: auto;
+  }
+  .cursor {
+    cursor: pointer;
+  }
