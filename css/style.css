@@ -6,10 +6,6 @@
     margin: auto;
   }
 
-img {
-    width: 50%;
-    height:50%;
-}
 #slideshow {
     max-width: 1000px;
     position: absolute;
@@ -18,9 +14,9 @@ img {
   .cursor {
     cursor: pointer;
   }
-  .mySlides{
+  /* .mySlides{
     width: 50%;
     height:50%;
-  }
+  } */
 
   

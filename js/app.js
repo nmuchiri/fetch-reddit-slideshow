@@ -1,7 +1,7 @@
 
 console.log("fired")
 
-const requestUrl ="http://www.reddit.com/search.json?q=cats"
+const requestUrl ="http://www.reddit.com/search.json?q="
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -13,25 +13,28 @@ document.addEventListener("DOMContentLoaded", ()=>{
         form.style.display="none"
         h1.style.display="none"
         description.style.display="none"
-        fetchCats(requestUrl+input.value)
-        createSlideShow()
+        fetchData(requestUrl+input.value)
+        addPhoto()  
     })
 
     // button.addEventListener("click",showSlides)
 
 })
 
-    let cats=[]
+    let data
+    let slideIndex=1
     
-    const fetchCats = (endpoint) => {
+    const fetchData = (endpoint) => {
         fetch(endpoint)
+    
         .then((responseData)=>{
             return responseData.json();
         })
         .then((jsonData)=>{
             console.log("jsonData.results:",jsonData.data.children)
-            cats = jsonData.data.children
-            addCatPhoto()
+            data = jsonData.data.children
+            
+            addPhoto()
             
         })
         .catch((error)=>{
@@ -40,72 +43,66 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
  
     
-   let pics=[]
+//    let pictureArray
    let i
 
-    const addCatPhoto= () => {
+    const addPhoto= () => {
+
+        let pictureArray= data.map(dataObject=>{
+            return dataObject.data.url
+            
+        })
+        console.log(pictureArray)
+        for(let i=0; i<pictureArray.length; i++){
+            let pics= document.createElement("img")
+            pics.src = pictureArray[i]
+            pics.setAttribute("class", "mySlides")
+
+            while(slideShow.firstChild) {
+                slideShow.removeChild(slideShow.firstChild)
+             }
+            slideShow.appendChild(pics)
+            console.log(pics)
+            console.log(slideShow)
+            pics.style.display="none"
         
-        let slideShow=document.querySelector("#slideShow")
-        let pic0 = document.createElement('img')
-        // console.log(pic)
-        // pic.classList.add("mySlides")
-        cats.forEach(element => console.log(element))
-    
-            // console.log(cats[i].data.thumbnail)
-             
-        pic0.setAttribute('src', cats[0].data.thumbnail)
-        console.log(pic0)
-        slideShow.appendChild(pic0)
+            // let slides = document.querySelectorAll(".mySlides")
+            // console.log(slides)
 
-        let pic1 = document.createElement('img')
-        pic1.setAttribute('src', cats[1].data.thumbnail)
-        slideShow.appendChild(pic1)
-    
-        // pic.setAttribute('src', cats[i].data.thumbnail)
-        // console.log(pic)
-        // slideShow.appendChild(pic)
+            // for (let i = 0; i < slides.length; i += 1) {
+            //     slides[i].style.display = "block"
 
-    
-//    createSlideShow()
-}
-
-function createSlideShow(){
-    addCatPhoto()
-    document.slide.src= pics[i]
-    if(i < pics.length-1){
-        i++
-    }else{
-        i=0
-    }
-}
-setTimeout("createSlideShow()", 3000)
+               
+            }
+            createSlideShow()
+        }
 
 
-// let slideIndex=1
-// createSlideShow(slideIndex)
-// function createSlideShow(n){
-//     let slides = document.querySelectorAll(".mySlides")
-//     console.log(slides)
-//     for (i = 0; i < slides.length; i++) {
-//     // console.log(slides[i])
+createSlideShow(slideIndex)
+function createSlideShow(n){
+    let slides = document.querySelectorAll(".mySlides")
+    console.log(slides)
+    for (i = 0; i < slides.length; i++) {
+    // console.log(slides[i])
   
-//     slides[i].style.display = "block" 
+    slides[i].style.display = "none" 
    
-//     }
-//     if (n > slides.length) {
-//         slideIndex = 1 }
-//         console.log(slideIndex)
-//     if (n < 1) {slideIndex = slides.length}
-//     console.log(slides.length)
-//     slides[slideIndex-1].style.display = "block"
-//     console.log(slides[slideIndex-1])
+    }
+    if (n > slides.length) {
+        slideIndex = 1 }
+        console.log(slideIndex)
+    if (n < 1) {slideIndex = slides.length}
+    console.log(slides.length)
+
+    slides[slideIndex-1].style.display = "block"
+    console.log(slides[slideIndex-1])
     
-// } 
+} 
 
      
 
 function plusSlides() {
-    createSlideShow
+    addPhoto()
   }
   plusSlides()
   
