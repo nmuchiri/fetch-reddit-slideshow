@@ -1,8 +1,7 @@
 
 console.log("fired")
 
-const requestUrl ="http://www.reddit.com/search.json?q=moon"
-
+const requestUrl ="http://www.reddit.com/search.json?q=cats"
 
 
 document.addEventListener("DOMContentLoaded", ()=>{
@@ -15,13 +14,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
         h1.style.display="none"
         description.style.display="none"
         fetchCats(requestUrl+input.value)
+        createSlideShow()
     })
 
     // button.addEventListener("click",showSlides)
 
 })
 
-    
+    let cats=[]
     
     const fetchCats = (endpoint) => {
         fetch(endpoint)
@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
         })
         .then((jsonData)=>{
             console.log("jsonData.results:",jsonData.data.children)
-            let cats = jsonData.data.children
-                    addCatPhoto(cats)
+            cats = jsonData.data.children
+            addCatPhoto()
             
         })
         .catch((error)=>{
@@ -40,48 +40,53 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
  
     
+   
 
-    const addCatPhoto= (cats) => {
-         for(let i = 0; i < cats.length; i++) {
-        // console.log(cats[i])
+    const addCatPhoto= () => {
+        
         let slideShow=document.querySelector("#slideShow")
-        // console.log(slideShow)
         let pic = document.createElement('img')
         // console.log(pic)
         pic.classList.add("mySlides")
-        pic.setAttribute('src', cats[i].data.thumbnail)
+        pic.setAttribute('src', cats[i].data.url)
+        console.log(pic)
         slideShow.appendChild(pic)
- 
-    }
+
+        cats.forEach(element => console.log(element))
+
+        photo0= cats[2]
+        console.log(photo0)
+
     
    createSlideShow()
 }
 
 
 let slideIndex=1
-const createSlideShow=(n)=>{
+createSlideShow(slideIndex)
+function createSlideShow(n){
     let slides = document.querySelectorAll(".mySlides")
     // console.log(slides)
     for (i = 0; i < slides.length; i++) {
     // console.log(slides[i])
   
-    slides[i].style.display = "none" 
-    console.log(slides[i])    
+    slides[i].style.display = "block" 
+   
     }
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    slides[slideIndex-1].style.display = "block"
-    console.log(slides[slideIndex-1])
+    // if (n > slides.length) {
+    //     slideIndex = 1 }
+    //     console.log(slideIndex)
+    // if (n < 1) {slideIndex = slides.length}
+    // console.log(slides.length)
+    // slides[slideIndex-1].style.display = "block"
+    // console.log(slides[slideIndex-1])
+    
 } 
 
      
 
-// function plusSlides(n) {
-//     createSlideShow(slideIndex += n);
-//   }
-
-//   plusSlides()
-//   function currentSlide(n) {
-//     createSlideShow(slideIndex = n);
-//   }
-//   currentSlide()
+function plusSlides(n) {
+    createSlideShow(slideIndex += n);
+  }
+  plusSlides()
+  

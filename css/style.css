@@ -18,3 +18,9 @@ img {
   .cursor {
     cursor: pointer;
   }
+  .mySlides{
+    width: 50%;
+    height:50%;
+  }
+
+  
