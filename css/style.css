@@ -1,6 +1,14 @@
 * {box-sizing:border-box}
-
-#slideshow {
+body{
+  background-image:url("https://pixabay.com/get/57e2d1464253ab14f1dc8460da29317e1739dce1515271_640.jpg") 
+}
+#h1, #description, #form, #button {
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+}
+/* #slideshow {
+    
     max-width: 1000px;
     position: absolute;
     margin: auto;
@@ -11,6 +19,6 @@
   .mySlides{
     width: 50%;
     height:50%;
-  } 
+  }  */
 
   
