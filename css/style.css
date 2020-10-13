@@ -2,21 +2,15 @@
 
 #slideshow {
     max-width: 1000px;
-    position: relative;
-    margin: auto;
-  }
-
-#slideshow {
-    max-width: 1000px;
     position: absolute;
     margin: auto;
   }
   .cursor {
     cursor: pointer;
   }
-  /* .mySlides{
+  .mySlides{
     width: 50%;
     height:50%;
-  } */
+  } 
 
   

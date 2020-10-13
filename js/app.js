@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
         h1.style.display="none"
         description.style.display="none"
         fetchData(requestUrl+input.value)
-        addPhoto()  
+        addPhoto() 
+        createSlideShow() 
     })
 
     // button.addEventListener("click",showSlides)
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
     let data
     let slideIndex=1
+    let pictureArray
     
     const fetchData = (endpoint) => {
         fetch(endpoint)
@@ -42,64 +44,53 @@ document.addEventListener("DOMContentLoaded", ()=>{
         })
     }
  
-    
-//    let pictureArray
-   let i
+
 
     const addPhoto= () => {
-
+        
         let pictureArray= data.map(dataObject=>{
-            return dataObject.data.url
+
+                return dataObject.data.thumbnail
             
         })
         console.log(pictureArray)
         for(let i=0; i<pictureArray.length; i++){
+
             let pics= document.createElement("img")
             pics.src = pictureArray[i]
+            console.log(pics.src)
             pics.setAttribute("class", "mySlides")
-
-            while(slideShow.firstChild) {
-                slideShow.removeChild(slideShow.firstChild)
-             }
-            slideShow.appendChild(pics)
             console.log(pics)
-            console.log(slideShow)
-            pics.style.display="none"
-        
-            // let slides = document.querySelectorAll(".mySlides")
-            // console.log(slides)
 
-            // for (let i = 0; i < slides.length; i += 1) {
-            //     slides[i].style.display = "block"
-
-               
-            }
-            createSlideShow()
+        slideShow.appendChild(pics)
+        console.log(slideShow)
+        pics.style.display="none"
         }
 
-
-createSlideShow(slideIndex)
-function createSlideShow(n){
-    let slides = document.querySelectorAll(".mySlides")
-    console.log(slides)
-    for (i = 0; i < slides.length; i++) {
-    // console.log(slides[i])
-  
-    slides[i].style.display = "none" 
-   
+        createSlideShow()
     }
-    if (n > slides.length) {
-        slideIndex = 1 }
-        console.log(slideIndex)
-    if (n < 1) {slideIndex = slides.length}
-    console.log(slides.length)
 
-    slides[slideIndex-1].style.display = "block"
-    console.log(slides[slideIndex-1])
-    
-} 
+    const createSlideShow = ()=>{
+        let i=0
+        let pictures
+        pictures = slideShow.children
+        console.log(slideShow.children)
+        
+            setInterval(function(){
 
-     
+                pictures[i].style.display = "none"
+                console.log(pictures[i])
+                if (i+1 < pictures.length) {
+                    i++;
+                }
+                else {
+                    i = 0
+                }
+                pictures[i].style.display = "inline-block"
+            }, 3000)}
+         
+        
+        
 
 function plusSlides() {
     addPhoto()
